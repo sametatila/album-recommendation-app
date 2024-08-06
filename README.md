@@ -1,6 +1,6 @@
 # Album Recommendation System
 
-This project is an Album Recommendation System built using Flask, GraphQL, and MongoDB. The system scrapes data from the BMAT team page, fetches additional data from the Spotify API, and stores it in MongoDB. The web interface allows users to search for albums, view recommendations, and navigate through paginated results.
+This project is an Album Recommendation System built using Flask, GraphQL, and MongoDB. The system scrapes data from the BMAT team page, fetches additional data from the Spotify API, and stores it in MongoDB. The web interface allows users to search for albums, view recommendations, and navigate through results.
 
 ## Project Purpose
 
@@ -15,7 +15,6 @@ The goal of this project is to create a web application that provides music albu
 - **MongoDB**: Stores album data in MongoDB.
 - **GraphQL**: Implements GraphQL for querying album data.
 - **Flask**: Provides a web interface for searching and viewing albums and recommendations.
-- **Pagination**: Implements pagination for album listings and recommendations.
 
 ## Technologies Used
 

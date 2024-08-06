@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Recommendation System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <!-- Countdown timer HTML structure placed above the main heading -->
+    <div class="container my-4">
+        <div id="countdown-container" class="countdown-container">
+        <h1 id="headline">Project will be down in</h1>
+        <div id="countdown">
+            <ul>
+            <li><span id="days"></span>Days</li>
+            <li><span id="hours"></span>Hours</li>
+            <li><span id="minutes"></span>Minutes</li>
+            <li><span id="seconds"></span>Seconds</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 id="album-recommendation-system" class="my-4">Album Recommendation System</h1>
+
+        <div class="search-container mb-4">
+            <div class="input-group">
+                <input type="text" id="search" class="form-control" placeholder="Search for albums or artists or name or title" onkeyup="showSuggestions(this.value)" onkeydown="handleKeyDown(event)">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" onclick="searchAlbums()">Search</button>
+                </div>
+            </div>
+            <div id="autocomplete-suggestions" class="autocomplete-suggestions"></div>
+        </div>
+
+        <h2><a href="#" id="all-albums-header">All Albums</a></h2>
+        <div id="no-search-results-message" class="text-muted" style="display: none;">
+            No albums found for the search query.
+        </div>
+        <ul id="all-albums" class="album-list list-group"></ul>
+        <div id="all-albums-pagination" class="d-flex justify-content-between align-items-center my-4">
+            <span id="all-albums-pagination-info" class="text-muted"></span>
+            <div id="all-albums-pagination-buttons"></div>
+        </div>
+
+        <h2 id="recommendations-header">Recommendations</h2>
+        <div id="no-recommendations-message" class="text-muted" style="display: none;">
+            Please select an album or genre to view recommendations.
+        </div>
+        <ul id="recommendations" class="album-list list-group"></ul>
+        <div id="recommendations-pagination" class="d-flex justify-content-between align-items-center my-4">
+            <span id="recommendations-pagination-info" class="text-muted"></span>
+            <div id="recommendations-pagination-buttons"></div>
+        </div>
+    </div>  
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="static/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+ariadne==0.23.0
+beautifulsoup4==4.12.3
+Flask==3.0.3
+Flask_PyMongo==2.3.0
+Flask_Testing==0.8.1
+mongomock==4.1.2
+pymongo==4.8.0
+Requests==2.32.3
+spotipy==2.24.0

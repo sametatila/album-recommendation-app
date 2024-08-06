@@ -1,0 +1,55 @@
+pipeline {
+    agent {
+        docker {
+            image 'python:3.8-slim'
+            args '-u root'
+        }
+    }
+
+    environment {
+        SPOTIPY_CLIENT_ID = 'your-spotify-client-id'
+        SPOTIPY_CLIENT_SECRET = 'your-spotify-client-secret'
+        MONGO_URI = 'your-mongo-uri'
+    }
+    
+    triggers {
+        cron('H 0 * * *')
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    git branch: 'main',
+                        credentialsId: 'github-ssh-key',
+                        url: 'git@github.com:sametatila/album-recommendation-system.git'
+                }
+            }
+        }
+       stage('Install Dependencies') {
+            steps {
+                sh '''
+                python -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
+            }
+        }
+        stage('Run Script') {
+            steps {
+                sh '''
+                . venv/bin/activate
+                cd scripts
+                python bmat_loves.py
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+            deleteDir()
+        }
+    }
+}

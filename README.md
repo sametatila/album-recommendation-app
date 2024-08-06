@@ -6,7 +6,7 @@ This project is an Album Recommendation System built using Flask, GraphQL, and M
 
 The goal of this project is to create a web application that provides music album recommendations based on the genres of albums liked by the BMAT Music Innovators team. The application allows users to see which albums are liked by team members and lists similar albums.
 
-**Note:** This project will be live on [https://sametatila.live](https://sametatila.live) for only 30 days and will be shut down on September 13, 2024 12.00 pm.
+**Note:** This project will be live on [https://sametatila.live](https://sametatila.live) for only 30 days and will be shut down on September 13, 2024, at 12.00 pm.
 
 ## Features
 

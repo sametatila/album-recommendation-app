@@ -167,3 +167,68 @@ To deploy the application using Docker, follow these steps:
     ```
 
 This setup ensures that the application is containerized and can be easily deployed across different environments.
+
+## Nginx Configuration
+Add `include /etc/nginx/sites-enabled/*;` in `/etc/nginx/nginx.conf` for symbolic link
+```nginx
+http{
+    ...
+    include /etc/nginx/sites-enabled/*;
+    ...
+}
+```
+
+To set up Nginx as a reverse proxy for your application, add the following configuration to your `/etc/nginx/sites-available/your-domain-name` file:
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain-name www.your-domain-name;
+    # Redirect HTTP to HTTPS
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name your-domain-name www.your-domain-name;
+    ssl_certificate /etc/nginx/ssl/your-ssl-certificate.crt;
+    ssl_certificate_key /etc/nginx/ssl/your-ssl-certificate-key.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /jenkins/ {
+        proxy_pass http://localhost:8080/jenkins/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+```
+
+To enable the congifuration file
+```sh
+sudo ln -s /etc/nginx/sites-available/sametatila.live /etc/nginx/sites-enabled/
+```
+
+Then
+```sh
+sudo systemctl restart nginx
+```
+
+This configuration sets up Nginx to redirect HTTP to HTTPS, proxy requests to the Flask application running on port 5000, and proxy Jenkins requests to port 8080.
